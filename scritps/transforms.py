@@ -5,7 +5,6 @@ def resize_transform(frame,des_width):
 
     scale = des_width/frame.shape[0]
     dims = (int(frame.shape[1]*scale),int(frame.shape[0]*scale))
-    print("dims ",dims)
     return cv.resize(frame,dims,interpolation= cv.INTER_AREA )
 
 def crop(frame,des_width):
@@ -27,3 +26,24 @@ def rescaleFrame(frame, scale=0.75):
     dimensions = (width,height)
 
     return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+
+from torch.utils.data import Dataset, DataLoader,random_split
+# class ObjectLoader(Dataset):
+#     def __init__(self,data,transforms):
+#         super(ObjectLoader,self).__init__()
+#         self.data = data
+#         self.transforms = transforms
+#         self.transform_data()
+#     def transform_data(self):
+#         self.data
+#         for elem in self.data:
+#             for tr in self.transforms:
+#                 print("elem: ",elem)
+#                 elem = tr(elem[0])
+
+
+#     def __getitem__(self,idx):
+#         img ,label= self.data[idx][0], self.data[idx][1]
+#         return img,label
+#     def __len__(self):
+#         return len(self.data)
