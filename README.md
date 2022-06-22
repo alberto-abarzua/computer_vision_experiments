@@ -1,4 +1,4 @@
-# Computer vision
+# Computer vision Experiments
 
 ### First experiments using OpenCV and PyTorch.
 
