@@ -2,6 +2,8 @@
 
 ### First experiments using OpenCV and PyTorch.
 
+### DISCLAIMER: This is at a very early stage so there are many things to improve. (More on the section Things to improve.)
+
 The idea of this repo is to test out some computer vision techniques to later use them as a tool/controller for the robot arm I am developing.
 Repo of the robot arm.
 
@@ -51,7 +53,18 @@ A modified version of DenseNet-121 was implemented using pytorch. This model tak
 
 ## Various objects in the same frame.
   <img src="src/overview.png" style = "width: 30rem;" alt="">
-## Video demo.
+  <img src="src/another.png" style = "width: 30rem;" alt="">
+
+
+## Things to improve
+
+- The object detection algorithm (the way countours are found).
+- The data augmentation for the creation of new datasets.
+- How the ROI's are processed and sent to the classifier model. (CNN)
+- Many others ... (The ones just mentioned are the most important at the moment.)
+
+
+
 
 
 
