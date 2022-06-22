@@ -1,1 +1,6 @@
-# computer_vision_tests
+# Computer vision
+
+### Various experiments using OpenCV and PyTorch.
+
+
+More coming soon..
