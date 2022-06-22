@@ -45,8 +45,9 @@ def prep_transform(frame,des_width):
     Returns:
         np.array: new transformed frame.
     """
-    return crop(resize_transform(frame,des_width),des_width)
-
+    frame = crop(resize_transform(frame,des_width),des_width)
+   
+    return frame
 
 def rescaleFrame(frame, scale=0.75):
     """Used to rescale a frame, mantaining it's ratio
@@ -88,12 +89,23 @@ def define_background(background,frame):
     Returns:
         np.array: modified background, or frame if background was None.
     """
+    frame = cv2.normalize(frame,frame, 0, 255, cv2.NORM_MINMAX)
     if background is None:
         return frame.copy().astype("float")
-
     cv2.accumulateWeighted(frame,background,0.5)
     return background
 
+def end_background(background):
+    """Once the background is defined we normalize it
+
+    Args:
+        background (np.array): img of background
+
+    Returns:
+        np.array: normalized background.
+    """
+    background = cv2.normalize(background,background, 0, 255, cv2.NORM_MINMAX)
+    return background
 
 def get_objs(background,frame,threshold,area_min):
     """Gets the biggest countours generated from the difference between the background frame and a given frame.
@@ -109,6 +121,7 @@ def get_objs(background,frame,threshold,area_min):
          and the difference frame between frame and background
     """
     frame = frameTr(frame)
+    
     diff = cv2.absdiff(background.astype("uint8"),frame)
     _ ,thresh = cv2.threshold(diff,threshold,255,cv2.THRESH_BINARY)
     thresh = cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY)

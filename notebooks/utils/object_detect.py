@@ -1,3 +1,4 @@
+from pickle import FALSE
 from turtle import back
 import cv2
 import numpy as np
@@ -12,35 +13,38 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import denseNet as dn
 __author__ = "Alberto Abarzua"
 
+
+
 BASE = Path(__file__).parent.parent.joinpath("data")
-DATA = BASE / "obj_log"
-DATAROIS = DATA/"rois"
-
-SAVE_ROIS = True
-PRESSED = False
-dirs = [str(x) for x in range(1,10)]
-CUR_DIR = "1"
-
-if SAVE_ROIS:
-    if os.path.exists(DATAROIS): 
-        shutil.rmtree(DATAROIS)
-
-    os.mkdir(DATAROIS) 
-    for elem in dirs:
-        os.mkdir(DATAROIS/elem)
-
-    MODEL = BASE.joinpath("dataset/output_data")
-
-
 
 def run_obj_detection():
     """Used to run the object detection script using webcam as video input.
     """
     
+    DATA = BASE / "obj_log"
+    DATAROIS = DATA/"rois"
+
+    SAVE_ROIS = False
+    PRESSED = False
+    dirs = [str(x) for x in range(1,10)]
+    CUR_DIR = "1"
+
+    if SAVE_ROIS:
+        if os.path.exists(DATAROIS): 
+            shutil.rmtree(DATAROIS)
+
+        os.mkdir(DATAROIS) 
+        for elem in dirs:
+            os.mkdir(DATAROIS/elem)
+
+    MODEL = BASE.joinpath("dataset/output_data")
+
+
     num_frames = 0
     background = None
     FRAME_SIZE = 256
-    FRAMES_CALIBRATION = 120
+    FRAMES_CALIBRATION = 30
+    THRESH = 50
     model_data = torch.load(MODEL/"densenet")
     label_dict = model_data["labels"]
     model = dn.DenseNet(len(label_dict))
@@ -71,12 +75,13 @@ def run_obj_detection():
                 cv2.imshow("obj", rescaleFrame(frame,5))
             else:
                 print("SAVING Bg!")
+                background = end_background(background)
                 np.save(DATA/"background",background)
             num_frames += 1
             continue
                 
         
-        val = get_objs(background,frame_copy,65,200)
+        val = get_objs(background,frame_copy,THRESH,200)
         if val is not None: 
             objs,_= val
             for elem in objs:

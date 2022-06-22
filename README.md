@@ -35,14 +35,22 @@ The main objectives to solve are:
 ## About the CNN model used.
 
 A modified version of DenseNet-121 was implemented using pytorch. This model takes as an input images (RGB) of size 32 (3,32,32) used to classify the several classes defined in "Training sequence"
+## Sample dataset examples
 
 
-# Some examples
 
-## Getting the ROI of a frame.
-  coming soon ...
+
+# Some examples.
+
+
+## Object segmentation process.
+
+<img src="src/segment.png" style = "width: 30rem;" alt="">
+
+<img src="src/roi.png" style = "width: 30rem;" alt="">
+
 ## Various objects in the same frame.
-  coming soon ...
+  <img src="src/overview.png" style = "width: 30rem;" alt="">
 ## Video demo.
 
 
