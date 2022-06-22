@@ -5,16 +5,15 @@
 ### DISCLAIMER: This is at a very early stage so there are many things to improve. (More on the section Things to improve.)
 
 The idea of this repo is to test out some computer vision techniques to later use them as a tool/controller for the robot arm I am developing.
-Repo of the robot arm.
+
+
+[Robot Arm Repository ](https://github.com/alberto-abarzua/3d_printed_robot_arm)
 
 The main objectives to solve are:
 
 1. Given a static camera with a static background, detect new objects that enter it's FOV (field of view).
 2. Quick way to define types and new objects to detect (Be able to train the model only with data gathered within a few minutes of a training prodecure).
 3. Classify objects mentioned in (1) using the gathered data mentioned in (2).
-
-
-[Robot Arm](https://github.com/alberto-abarzua/3d_printed_robot_arm)
 
 ## For the first aproach the following workflow was used. This is divided in to main sections.
 
